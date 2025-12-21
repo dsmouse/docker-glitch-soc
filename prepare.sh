@@ -51,7 +51,7 @@ GIT_COMMIT=`git rev-parse --short HEAD`
 git_banner $GIT_COMMIT
 
 # version string shown in Mastodon UI, etc.
-DISP_VER="`date '+%m%d'${GIT_COMMIT:0:7}`"
+DISP_VER="`date '+%y%m%d'_${GIT_COMMIT:0:7}`"
 
 ##
 process_banner "patch"
