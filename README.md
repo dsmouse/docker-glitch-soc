@@ -4,22 +4,26 @@
 
 # Mastodon Glitch Edition Dockerfile and docker-compose
 
-## using this image has no benefit. Use official glitch-soc docker image.
+## Using this image has no benefit. Use official glitch-soc docker image.
 
 Mastodon glitch edition official image is available:  
 https://github.com/glitch-soc/mastodon/pkgs/container/mastodon
 
 `docker pull ghcr.io/glitch-soc/mastodon`
 
-My build:
 
-* yakumosaki/glitch-soc-aarch64 ( https://hub.docker.com/r/yakumosaki/glitch-soc-aarch64 )
+## dockerhub
+
+Now supports amd64 and arm64
+
 * yakumosaki/glitch-soc ( https://hub.docker.com/r/yakumosaki/glitch-soc )
 
 ## news
 
 Date is in JST (GMT+9)
 
+* 2025/12/21 Add this image is deprecated. and maybe fixed due to wrong multiarch handling
+* 2025/06/xx Unifying aarch64 and amd64 images to yakumosaki/glitch-soc, and amd64 image is broken.
 * 2025/06/14 Update Ruby 3.4.4
 * 2024/05/05 Build is back to normal. update ruby to 3.2.3. and YJIT is enabled.
 * 2023/12/24 Merry X'mas. build is back to normal. Official docker image is splitted to web / Streaming. But my image is not splitted.
@@ -38,10 +42,4 @@ Date is in JST (GMT+9)
 
 ## known issue
 
-* ~Ruby not using jmalloc~
-* node.js version must be changed when node.js LTS is updated
-
-## pre-built image 
-
-* https://hub.docker.com/r/yakumosaki/glitch-soc  (x86_64)
-* https://hub.docker.com/r/yakumosaki/glitch-soc-aarch64 8arch64)
+* Image size is large due to web and streaming is in same image.
