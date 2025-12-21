@@ -51,7 +51,7 @@ GIT_COMMIT=`git rev-parse --short HEAD`
 git_banner $GIT_COMMIT
 
 # version string shown in Mastodon UI, etc.
-DISP_VER="`date '+%m%d'_${GIT_COMMIT:0:7}`"
+DISP_VER="`date '+%m%d'${GIT_COMMIT:0:7}`"
 
 ##
 process_banner "patch"
@@ -67,9 +67,8 @@ process_banner "patch"
 # sed -i s/mimemagic.*0.3.5/"mimemagic (0.3.10"/ Gemfile.lock
 
 echo "add MASTODON_VERSION_METADATA"
-sed -i -e "s/!!!!!!REPLACE_VER_METADATA!!!!!!/${DISP_VER}/" "${BASE_DIR}/aarch64/Dockerfile"
-sed -i -e "s/!!!!!!REPLACE_VER_METADATA!!!!!!/${DISP_VER}/" "${BASE_DIR}/x86_64/Dockerfile"
-
+sed -i -e "s/!!!!!!REPLACE_VER_METADATA!!!!!!/${DISP_VER}/" "${BASE_DIR}/Dockerfile"
+sed -i -e "s/!!!!!!REPLACE_SOURCE_COMMIT!!!!!!/${GIT_COMMIT}/" "${BASE_DIR}/Dockerfile"
 
 echo "patch done"
 

@@ -1,6 +1,21 @@
 # syntax=docker/dockerfile:1.18
+
+# START CONFIG ARGS ------------------------------
+
 ARG NODE_VERSION="lts-trixie-slim"
-#ARG RUBY_YJIT_ENABLE="1"
+ARG RUBY_YJIT_ENABLE="1"
+
+# Resulting version string is vX.X.X-MASTODON_VERSION_PRERELEASE+MASTODON_VERSION_METADATA
+# Example: v4.3.0-nightly.2023.11.09+pr-123456
+# Overwrite existence of 'alpha.X' in version.rb [--build-arg MASTODON_VERSION_PRERELEASE="nightly.2023.11.09"]
+#ARG MASTODON_VERSION_PRERELEASE=""
+# Append build metadata or fork information to version.rb [--build-arg MASTODON_VERSION_METADATA="pr-123456"]
+ARG MASTODON_VERSION_METADATA="!!!!!!REPLACE_VER_METADATA!!!!!!"
+# Will be available as Mastodon::Version.source_commit
+ARG SOURCE_COMMIT="!!!!!!REPLACE_SOURCE_COMMIT!!!!!!"
+
+# END CONFIG ARGS --------------------------------
+
 
 # get ruby from moritzheiber's jemalloc image
 FROM ghcr.io/moritzheiber/ruby-jemalloc:3.4.4-slim AS ruby
@@ -189,7 +204,10 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     # Enable libvips, should not be changed
     MASTODON_USE_LIBVIPS=true \
     # Sidekiq will touch tmp/sidekiq_process_has_started_and_will_begin_processing_jobs to indicate it is ready. This can be used for a readiness check in Kubernetes
-    MASTODON_SIDEKIQ_READY_FILENAME=sidekiq_process_has_started_and_will_begin_processing_jobs
+    MASTODON_SIDEKIQ_READY_FILENAME=sidekiq_process_has_started_and_will_begin_processing_jobs \
+    # Apply Mastodon version information
+    MASTODON_VERSION_METADATA="${MASTODON_VERSION_METADATA}" \
+    SOURCE_COMMIT="${SOURCE_COMMIT}"
 
 COPY --link --from=ruby /opt/ruby /opt/ruby
 
