@@ -4,9 +4,12 @@
 
 # Mastodon Glitch Edition Dockerfile and docker-compose
 
+## using this image has no benefit. Use official glitch-soc docker image.
+
 Mastodon glitch edition official image is available:  
-(Use official image is recommended)  
 https://github.com/glitch-soc/mastodon/pkgs/container/mastodon
+
+`docker pull ghcr.io/glitch-soc/mastodon`
 
 My build:
 
