@@ -299,7 +299,7 @@ WORKDIR /opt/mastodon
 RUN \
     corepack enable && \ 
     corepack prepare --activate; \
-    yarn workspaces focus --production @mastodon/mastodon; \
+    yarn workspaces focus --all --production && \
     ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY=precompile_placeholder \
     ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT=precompile_placeholder \
     ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY=precompile_placeholder \
