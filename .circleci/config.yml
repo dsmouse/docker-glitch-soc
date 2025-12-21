@@ -78,7 +78,7 @@ jobs:
           name: "Config"
           command: |
             # configs
-            echo 'export DOCKER_TAG_SUFFIX="_x64"' >> "$BASH_ENV"
+            echo 'export DOCKER_TAG_SUFFIX="_amd64"' >> "$BASH_ENV"
             echo 'export DOCKER_PLATFORM="linux/amd64"' >> "$BASH_ENV"
       - checkout
       - build-and-push-image
