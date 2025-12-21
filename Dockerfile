@@ -292,6 +292,8 @@ RUN \
 # See the file /etc/apt/apt.conf.d/docker-clean within the Docker image's filesystem
 
 # Precompile assets
+
+# Set the run user
 WORKDIR /opt/mastodon
 
 RUN \
@@ -313,9 +315,8 @@ RUN \
     mkdir -p /opt/mastodon/public/system && \
     chown mastodon:mastodon /opt/mastodon/public/system && \
     # Set Mastodon user as owner of tmp folder
-    chown -R mastodon:mastodon /opt/mastodon/tmp
+    chown -R mastodon:mastodon /opt/mastodon
 
-# Set the run user
 USER mastodon
 
 # Set the work dir and the container entry point
